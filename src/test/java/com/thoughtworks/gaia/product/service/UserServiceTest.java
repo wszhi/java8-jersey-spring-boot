@@ -47,4 +47,9 @@ public class UserServiceTest {
         verify(userMap).map(userModel,User.class);
         assertEquals(user,result);
     }
+
+    @Test
+    public void shouldReturn() throws Exception {
+
+    }
 }

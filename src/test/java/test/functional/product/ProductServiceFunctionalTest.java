@@ -51,6 +51,6 @@ public class ProductServiceFunctionalTest {
 
     @Test(expected = NotFoundException.class)
     public void should_throw_exception_when_not_found() {
-        productService.getProduct(-1L);
+        productService.getProduct(1L);
     }
 }

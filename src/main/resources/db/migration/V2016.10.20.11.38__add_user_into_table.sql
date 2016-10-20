@@ -1,1 +1,1 @@
-insert into gaia.USER (username,age) values ('shengzhi wang', 21);
+-- insert into gaia.USER (username,age) values ('shengzhi wang', 21);
