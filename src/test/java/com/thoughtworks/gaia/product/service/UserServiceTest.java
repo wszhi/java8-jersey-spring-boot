@@ -28,7 +28,6 @@ public class UserServiceTest {
 
     @Before
     public void setUp() throws Exception {
-        userService = new UserService();
         initMocks(this);
     }
 

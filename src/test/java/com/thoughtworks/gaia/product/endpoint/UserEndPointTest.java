@@ -29,7 +29,7 @@ public class UserEndPointTest {
     @Before
     public void setUp() throws Exception {
 
-        userEndPoint = new UserEndPoint();
+//        userEndPoint = new UserEndPoint();
         initMocks(this);
     }
 
