@@ -5,6 +5,7 @@ import com.thoughtworks.gaia.common.constant.EnvProfile;
 import com.thoughtworks.gaia.product.dao.A1NDao;
 import com.thoughtworks.gaia.product.dao.B1NDao;
 import com.thoughtworks.gaia.product.entity.A1N;
+import com.thoughtworks.gaia.product.entity.B1N;
 import com.thoughtworks.gaia.product.model.A1NModel;
 import com.thoughtworks.gaia.product.model.B1NModel;
 import com.thoughtworks.gaia.product.service.A1NService;
@@ -17,6 +18,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -62,6 +64,27 @@ public class A1NServiceFunctionalTest {
 
         assertThat(a1Ns.getName()).isEqualTo("name");
         assertThat(a1Ns.getB1Ns().get(0).getName()).isEqualTo("bname");
+
+    }
+    @Test
+    public void shouldAddA1NAndReturnURL() throws Exception {
+
+        A1N a1N = new A1N();
+        a1N.setName("testA");
+        List<B1N> b1NList=new ArrayList<>();
+        B1N b1N = new B1N();
+        b1N.setName("testB");
+        b1NList.add(b1N);
+        a1N.setB1Ns(b1NList);
+
+        String url = a1NService.addA1N(a1N);
+
+        assertThat(url).isEqualTo("/a1ns");
+
+        List<A1N> a1Ns = a1NService.getAllA1Ns();
+        assertThat(a1Ns.size()).isEqualTo(1);
+        assertThat(a1Ns.get(0).getB1Ns().size()).isEqualTo(1);
+        assertThat(a1Ns.get(0).getB1Ns().get(0).getName()).isEqualTo("testB");
 
     }
 

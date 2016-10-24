@@ -70,4 +70,22 @@ public class A1NService implements Loggable {
         a1N.setB1Ns(b1ns);
         return a1N;
     }
+
+    public String addA1N(A1N a1N) {
+        A1NModel a1NModel = a1NMap.map(a1N, A1NModel.class);
+        List<B1N> b1NList = a1N.getB1Ns();
+        try {
+            a1NDao.save(a1NModel);
+            List<B1NModel> b1NModels=b1NMap.mapList(b1NList,B1NModel.class);
+            for (B1NModel b1NModel:b1NModels) {
+                b1NModel.setA1nid(a1NModel.getId());
+                b1NDao.save(b1NModel);
+            }
+            return "/gaia/rest/a1ns";
+        } catch (Exception e) {
+
+            return null;
+        }
+
+    }
 }

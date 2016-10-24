@@ -28,3 +28,35 @@ DROP DATABASE IF EXISTS `gaia`; CREATE SCHEMA `gaia` DEFAULT CHARACTER SET utf8 
 - 中心服务器：<http://localhost:8080/gaia/rest/application.wadl>
 
 *注意：更改localhost到你希望查看的服务器IP*
+
+
+####1 show all A1N
+GET请求,访问URL:
+http://localhost:8080/gaia/rest/a1ns
+得到返回的JSON数据
+
+####2 select A1N by ID
+GET请求,访问URL:
+http://localhost:8080/gaia/rest/a1ns/1
+得到返回的JSON数据
+
+####3 add A1N with B1N list
+Post请求,使用postman发送请求
+
+访问的URL为
+http://localhost:8080/gaia/rest/a1ns
+请求类型是POST
+Body的数据类型是row,JSON(application/json)
+```
+{
+  "name": "today",
+  "b1Ns": [
+    {
+      "name": "Btest1"
+    },
+    {
+      "name": "Btest2"
+    }
+  ]
+}
+```

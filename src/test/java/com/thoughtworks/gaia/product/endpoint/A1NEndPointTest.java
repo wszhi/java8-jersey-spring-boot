@@ -58,4 +58,15 @@ public class A1NEndPointTest {
         Response expect = Response.ok().entity(a1N1).build();
         assertThat(response.getEntity(), is(expect.getEntity()));
     }
+    @Test
+    public void shouldReturnPostURIWhenAddAINSuccess() throws Exception {
+        A1N a1N1 =new A1N();
+        String url="/a1ns";
+        when(a1NService.addA1N(a1N1)).thenReturn(url);
+
+        Response response = a1NEndPoint.addA1N(a1N1);
+
+        Response expect = Response.ok().entity(url).build();
+        assertThat(response.getEntity(), is(expect.getEntity()));
+    }
 }

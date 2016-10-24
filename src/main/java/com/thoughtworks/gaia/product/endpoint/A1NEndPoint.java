@@ -43,4 +43,25 @@ public class A1NEndPoint {
         A1N a1N = a1NService.getA1NById(id);
         return Response.ok().entity(a1N).build();
     }
+
+    @Path("/")
+    @POST
+    public Response addA1N(A1N a1n) {
+        String url=a1NService.addA1N(a1n);
+        return Response.ok().entity(url).build();
+    }
+
+//    @Path("/{a1n_name}/{b1n_name}")
+//    @POST
+//    public Response addA1Ns(@PathParam("a1n_name")String a1N,@PathParam("b1n_name")String b1N) {
+//        A1N  a1N1 = new A1N();
+//        a1N1.setName(a1N);
+//        B1N b1N1 = new B1N();
+//        b1N1.setName(b1N);
+//        List b1Ns=new ArrayList<>();
+//        b1Ns.add(b1N1);
+//        a1N1.setB1Ns(b1Ns);
+//        String url=a1NService.addA1N(a1N1);
+//        return Response.ok().entity(url).build();
+//    }
 }
