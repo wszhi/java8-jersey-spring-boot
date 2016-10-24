@@ -1,7 +1,7 @@
-package com.thoughtworks.gaia.product.endpoint;
+package com.thoughtworks.gaia.a1n.endpoint;
 
-import com.thoughtworks.gaia.product.entity.A1N;
-import com.thoughtworks.gaia.product.service.A1NService;
+import com.thoughtworks.gaia.a1n.entity.A1N;
+import com.thoughtworks.gaia.a1n.service.A1NService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

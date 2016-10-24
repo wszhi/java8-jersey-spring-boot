@@ -1,4 +1,4 @@
-package com.thoughtworks.gaia.product.model;
+package com.thoughtworks.gaia.a1n.model;
 
 import com.thoughtworks.gaia.common.jpa.IdBaseModel;
 

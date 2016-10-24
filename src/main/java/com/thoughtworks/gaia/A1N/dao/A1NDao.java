@@ -1,7 +1,7 @@
-package com.thoughtworks.gaia.product.dao;
+package com.thoughtworks.gaia.a1n.dao;
 
 import com.thoughtworks.gaia.common.jpa.BaseDaoWrapper;
-import com.thoughtworks.gaia.product.model.A1NModel;
+import com.thoughtworks.gaia.a1n.model.A1NModel;
 import org.springframework.stereotype.Component;
 
 

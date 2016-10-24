@@ -1,19 +1,21 @@
-package com.thoughtworks.gaia.product.entity;
+package com.thoughtworks.gaia.a1n.entity;
+
+import java.util.List;
 
 /**
  * Created by szwang on 10/21/16.
  */
-public class B1N {
+public class A1N {
     private Long id;
-    private Long a1nid;
     private String name;
+    private List<B1N> b1Ns;
 
-    public Long getA1nid() {
-        return a1nid;
+    public List<B1N> getB1Ns() {
+        return b1Ns;
     }
 
-    public void setA1nid(Long a1nid) {
-        this.a1nid = a1nid;
+    public void setB1Ns(List<B1N> b1Ns) {
+        this.b1Ns = b1Ns;
     }
 
     public Long getId() {

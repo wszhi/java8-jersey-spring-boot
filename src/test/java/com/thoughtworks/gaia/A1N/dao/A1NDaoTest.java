@@ -1,8 +1,8 @@
-package com.thoughtworks.gaia.product.dao;
+package com.thoughtworks.gaia.a1n.dao;
 
 import com.thoughtworks.gaia.GaiaApplication;
 import com.thoughtworks.gaia.common.constant.EnvProfile;
-import com.thoughtworks.gaia.product.model.A1NModel;
+import com.thoughtworks.gaia.a1n.model.A1NModel;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
