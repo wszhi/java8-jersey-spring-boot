@@ -50,6 +50,20 @@ public class A1NEndPoint {
         String url=a1NService.addA1N(a1n);
         return Response.ok().entity(url).build();
     }
+    @Path("/{id}")
+    @PUT
+    public Response update(A1N a1N,@PathParam("id")Long id) {
+        a1N.setId(id);
+        String url=a1NService.updateA1N(a1N);
+        return Response.ok().entity(url).build();
+    }
+
+    @Path("/{id}")
+    @DELETE
+    public Response deleteA1N(@PathParam("id")Long id) {
+        String url=a1NService.deleteA1N(id);
+        return Response.ok().entity(url).build();
+    }
 
 //    @Path("/{a1n_name}/{b1n_name}")
 //    @POST

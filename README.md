@@ -41,11 +41,12 @@ http://localhost:8080/gaia/rest/a1ns/1
 得到返回的JSON数据
 
 ####3 add A1N with B1N list
-Post请求,使用postman发送请求
+POST请求,使用postman发送请求
 
 访问的URL为
 http://localhost:8080/gaia/rest/a1ns
 请求类型是POST
+Headers参数为Content-Type:application/json
 Body的数据类型是row,JSON(application/json)
 ```
 {
@@ -60,3 +61,23 @@ Body的数据类型是row,JSON(application/json)
   ]
 }
 ```
+返回一个URIString
+####4 update A1N with B1N list
+PUT 请求,使用postman发送请求
+
+访问的URL为
+http://localhost:8080/gaia/rest/a1ns/1
+请求类型是PUT
+Body的数据类型是row,JSON(application/json)
+```
+{
+  "name": "test1",
+  "b1Ns": [
+    {
+      "id": 1,
+      "name": "btest1"
+    }
+  ]
+}
+```
+返回一个URIString

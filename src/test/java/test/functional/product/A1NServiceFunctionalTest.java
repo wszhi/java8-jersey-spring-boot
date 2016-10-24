@@ -37,13 +37,25 @@ public class A1NServiceFunctionalTest {
 
     @Autowired
     private B1NDao b1NDao;
+    @Test
+    public void shouldGetA1NByID() throws Exception {
+        A1NModel a1NModel =dummyA1NModel();
+        a1NDao.save(a1NModel);
+        B1NModel b1NModel = dummyB1NModel(a1NModel.getId());
+        b1NDao.save(b1NModel);
+
+        A1N a1Ns = a1NService.getA1NById(a1NModel.getId());
+
+        assertThat(a1Ns.getName()).isEqualTo("name");
+        assertThat(a1Ns.getB1Ns().get(0).getName()).isEqualTo("bname");
+
+    }
 
     @Test
     public void shouldGetA1N() throws Exception {
-        A1NModel a1NModel = dummyA1NModel();
-
+        A1NModel a1NModel =dummyA1NModel();
         a1NDao.save(a1NModel);
-        b1NDao.save(dummyB1NModel());
+        b1NDao.save(dummyB1NModel(a1NModel.getId()));
 
         List<A1N> a1Ns = a1NService.getAllA1Ns();
 
@@ -53,25 +65,13 @@ public class A1NServiceFunctionalTest {
 
     }
 
-    @Test
-    public void shouldGetA1NByID() throws Exception {
-        A1NModel a1NModel = dummyA1NModel();
 
-        a1NDao.save(a1NModel);
-        b1NDao.save(dummyB1NModel());
 
-        A1N a1Ns = a1NService.getA1NById(1L);
-
-        assertThat(a1Ns.getName()).isEqualTo("name");
-        assertThat(a1Ns.getB1Ns().get(0).getName()).isEqualTo("bname");
-
-    }
     @Test
     public void shouldAddA1NAndReturnURL() throws Exception {
-
         A1N a1N = new A1N();
         a1N.setName("testA");
-        List<B1N> b1NList=new ArrayList<>();
+        List<B1N> b1NList = new ArrayList<>();
         B1N b1N = new B1N();
         b1N.setName("testB");
         b1NList.add(b1N);
@@ -79,7 +79,7 @@ public class A1NServiceFunctionalTest {
 
         String url = a1NService.addA1N(a1N);
 
-        assertThat(url).isEqualTo("/a1ns");
+        assertThat(url).isEqualTo("/gaia/rest/a1ns");
 
         List<A1N> a1Ns = a1NService.getAllA1Ns();
         assertThat(a1Ns.size()).isEqualTo(1);
@@ -88,15 +88,50 @@ public class A1NServiceFunctionalTest {
 
     }
 
+    @Test
+    public void shouldUpdateA1NAndReturnURL() throws Exception {
+        A1NModel a1NModel =dummyA1NModel();
+        a1NDao.save(a1NModel);
+        b1NDao.save(dummyB1NModel(a1NModel.getId()));
+
+        A1N a1N = new A1N();
+        a1N.setId(a1NModel.getId());
+        a1N.setName("testAChange");
+
+        String url = a1NService.updateA1N(a1N);
+        assertThat(url).isEqualTo("/gaia/rest/a1ns/"+a1NModel.getId());
+
+        A1N a1N1 = a1NService.getA1NById(a1NModel.getId());
+        assertThat(a1N1.getName()).isEqualTo("testAChange");
+
+    }
+
+    @Test
+    public void shouldDeleteA1NAndReturnURL() throws Exception {
+        A1NModel a1NModel =dummyA1NModel();
+        a1NDao.save(a1NModel);
+        b1NDao.save(dummyB1NModel(a1NModel.getId()));
+
+        List<A1N> a1Ns = a1NService.getAllA1Ns();
+        assertThat(a1Ns.size()).isEqualTo(1);
+
+        String url = a1NService.deleteA1N(a1NModel.getId());
+        assertThat(url).isEqualTo("/gaia/rest/a1ns");
+
+        a1Ns = a1NService.getAllA1Ns();
+        assertThat(a1Ns.size()).isEqualTo(0);
+    }
+
     private A1NModel dummyA1NModel() {
         A1NModel a1NModel = new A1NModel();
         a1NModel.setName("name");
         return a1NModel;
     }
-    private B1NModel dummyB1NModel() {
+
+    private B1NModel dummyB1NModel(Long a1NId) {
         B1NModel b1NModel = new B1NModel();
         b1NModel.setName("bname");
-        b1NModel.setA1nid(1L);
+        b1NModel.setA1nid(a1NId);
         return b1NModel;
     }
 

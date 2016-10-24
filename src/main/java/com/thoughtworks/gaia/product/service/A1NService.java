@@ -73,13 +73,15 @@ public class A1NService implements Loggable {
 
     public String addA1N(A1N a1N) {
         A1NModel a1NModel = a1NMap.map(a1N, A1NModel.class);
-        List<B1N> b1NList = a1N.getB1Ns();
+
         try {
             a1NDao.save(a1NModel);
-            List<B1NModel> b1NModels=b1NMap.mapList(b1NList,B1NModel.class);
-            for (B1NModel b1NModel:b1NModels) {
-                b1NModel.setA1nid(a1NModel.getId());
-                b1NDao.save(b1NModel);
+            if(a1N.getB1Ns() != null){
+                List<B1NModel> b1NModels = b1NMap.mapList(a1N.getB1Ns(), B1NModel.class);
+                for (B1NModel b1NModel : b1NModels) {
+                    b1NModel.setA1nid(a1NModel.getId());
+                    b1NDao.save(b1NModel);
+                }
             }
             return "/gaia/rest/a1ns";
         } catch (Exception e) {
@@ -87,5 +89,33 @@ public class A1NService implements Loggable {
             return null;
         }
 
+    }
+
+    public String updateA1N(A1N a1N) {
+        A1NModel a1NModel = a1NMap.map(a1N, A1NModel.class);
+        try {
+            a1NDao.update(a1NModel);
+            if(a1N.getB1Ns() != null) {
+                List<B1NModel> b1NModels = b1NMap.mapList(a1N.getB1Ns(), B1NModel.class);
+                for (B1NModel b1NModel : b1NModels) {
+                    b1NModel.setA1nid(a1N.getId());
+                    b1NDao.update(b1NModel);
+                }
+            }
+            return "/gaia/rest/a1ns/" + a1NModel.getId();
+        } catch (Exception e) {
+
+            return null;
+        }
+    }
+
+    public String deleteA1N(Long id) {
+        try {
+            A1NModel a1NModel = a1NDao.idEquals(id).querySingle();
+            a1NDao.remove(a1NModel);
+            return "/gaia/rest/a1ns";
+        } catch (Exception e) {
+            return null;
+        }
     }
 }

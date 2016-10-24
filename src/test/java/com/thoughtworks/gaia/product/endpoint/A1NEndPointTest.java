@@ -18,9 +18,7 @@ import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 
-/**
- * Created by szwang on 10/21/16.
- */
+
 @RunWith(MockitoJUnitRunner.class)
 public class A1NEndPointTest {
     @Mock
@@ -61,10 +59,32 @@ public class A1NEndPointTest {
     @Test
     public void shouldReturnPostURIWhenAddAINSuccess() throws Exception {
         A1N a1N1 =new A1N();
-        String url="/a1ns";
+        String url="/gaia/rest/a1ns";
         when(a1NService.addA1N(a1N1)).thenReturn(url);
 
         Response response = a1NEndPoint.addA1N(a1N1);
+
+        Response expect = Response.ok().entity(url).build();
+        assertThat(response.getEntity(), is(expect.getEntity()));
+    }
+    @Test
+    public void shouldReturnUpdateURIWhenUpdateAINSuccess() throws Exception {
+        A1N a1N1 =new A1N();
+        a1N1.setId(1L);
+        String url="/gaia/rest/a1ns/"+a1N1.getId();
+        when(a1NService.updateA1N(a1N1)).thenReturn(url);
+
+        Response response = a1NEndPoint.update(a1N1,1L);
+
+        Response expect = Response.ok().entity(url).build();
+        assertThat(response.getEntity(), is(expect.getEntity()));
+    }
+    @Test
+    public void shouldReturnDeleteURIWhenDeleteAINSuccess() throws Exception {
+        String url="/gaia/rest/a1ns";
+        when(a1NService.deleteA1N(1L)).thenReturn(url);
+
+        Response response = a1NEndPoint.deleteA1N(1L);
 
         Response expect = Response.ok().entity(url).build();
         assertThat(response.getEntity(), is(expect.getEntity()));
