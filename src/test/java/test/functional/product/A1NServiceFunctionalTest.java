@@ -37,6 +37,7 @@ public class A1NServiceFunctionalTest {
 
     @Autowired
     private B1NDao b1NDao;
+
     @Test
     public void shouldGetA1NByID() throws Exception {
         A1NModel a1NModel =dummyA1NModel();
