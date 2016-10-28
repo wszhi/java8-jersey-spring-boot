@@ -81,3 +81,85 @@ Body的数据类型是row,JSON(application/json)
 }
 ```
 返回一个URIString
+
+#### 5 Delete A1N By ID
+DELETE请求,使用postman发送请求
+
+访问的URL为
+http://localhost:8080/gaia/rest/a1ns/1
+请求类型是DELETE
+返回一个URI String
+
+#### 6 Show all ANN
+GET请求,访问URL:
+http://localhost:8080/gaia/rest/anns
+得到返回的JSON数据
+
+#### 7 Select ANN By Id
+GET请求,访问URL:
+http://localhost:8080/gaia/rest/anns/1
+得到返回的JSON数据
+
+#### 8 Add ANN With BNN
+POST请求,使用postman发送请求
+
+访问的URL为
+http://localhost:8080/gaia/rest/anns
+请求类型是POST
+Headers参数为Content-Type:application/json
+Body的数据类型是row,JSON(application/json)
+```
+{
+    "name":"todayA1",
+    "bnn":[{
+        "id":1
+        },{
+        "name":"todayB2"
+    }]
+}
+```
+请求将会在数据库中的操作:
+插入一个ANN,ANN的name为todayA1;
+插入一个BNN,BNN的name为todayB2;
+关联表ANN_BNN中插入一条记录:ann_id为刚刚插入的ANN的ID,bnn_id为1。
+关联表ANN_BNN中插入一条记录:ann_id为刚刚插入的ANN的ID,bnn_id为刚刚插入的"todayB2"记录的ID。
+注意:bnn的id必须已经存在于BNN表中。
+
+返回一个URI String
+
+
+#### 9 Update ANN With B1N List
+PUT 请求,使用postman发送请求
+
+访问的URL为
+http://localhost:8080/gaia/rest/anns/1
+请求类型是PUT
+Body的数据类型是row,JSON(application/json)
+```
+{
+    "name":"todayAChanged",
+    "bnn":[{
+        "id":2
+        },{
+        "id":3
+        },{
+            "name":"todayBNew"
+        }]
+    
+}
+```
+请求将会在数据库中的操作:
+更新ID为1的ANN,改name为todayAChanged;
+插入一个BNN,BNN的name为todayBNew;
+关联表ANN_BNN中ann_id为1的记录更新为当前的三条,bnn_id为2、3和刚插入的BNN的ID。
+注意:bnn的id必须已经存在于BNN表中。
+
+返回一个URI String
+
+#### 10 Delete ANN By ID
+DELETE请求,使用postman发送请求
+
+访问的URL为
+http://localhost:8080/gaia/rest/anns/1
+请求类型是DELETE
+返回一个URI String

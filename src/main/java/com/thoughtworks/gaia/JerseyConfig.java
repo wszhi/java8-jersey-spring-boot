@@ -14,6 +14,7 @@ public class JerseyConfig extends ResourceConfig {
     private static final String[] MODULE_PACKAGES = new String[]{
         "com.thoughtworks.gaia.product.endpoint",
         "com.thoughtworks.gaia.a1n.endpoint",
+        "com.thoughtworks.gaia.ann.endpoint"
     };
 
     public JerseyConfig() {
